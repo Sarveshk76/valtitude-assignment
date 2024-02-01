@@ -1,7 +1,7 @@
 # valtitude-assignment
 
 
-## Run Flask Application
+## Run Flask Application (For Windows Platform)
 1. Create virtual environment
     ```windows
     python3 -m venv venv
