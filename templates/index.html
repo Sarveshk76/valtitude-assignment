@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container-fluid m-5">
+
+        <div class="row flex-nowrap">
+            {% for r in json_data %}
+            <div class="col-3">
+                
+                {% if json_data[r]["4"] is not string  %}
+                <div class="row border border-secondary">*</div>
+                {% else %}
+                <div class="row border border-secondary">{{json_data[r]["4"]}}</div>
+                {% endif %}
+
+                {% if json_data[r]["7"] is not string %}
+                <div class="row border border-secondary">*</div>
+                {% else %}
+                <div class="row border border-secondary">{{json_data[r]["7"]}}</div>
+                {% endif %}
+
+                <div class="row border border-secondary">{{json_data[r]["9"]}}</div>
+
+
+                {% if json_data[r]["10"] is number and not loop.last %}
+                <div class="row border border-secondary bg-danger bg-opacity-75 text-white" id="a{{loop.index}}" contenteditable="true">{{json_data[r]["10"]}}</div>
+                {% elif json_data[r]["10"] is not number %}
+                <div class="row border border-secondary">{{json_data[r]["10"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white">{{json_data[r]["10"]}}</div>
+                {% endif %}
+                
+                {% if not loop.last %}
+                <div class="row border border-secondary" id="b{{loop.index}}">{{json_data[r]["11"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white" id="b{{loop.index}}">{{json_data[r]["11"]}}</div>
+                {% endif %}
+
+                {% if json_data[r]["12"] is number and not loop.last %}
+                <div class="row border border-secondary bg-danger bg-opacity-75 text-white" id="c{{loop.index}}" contenteditable="true">{{json_data[r]["12"]}}</div>
+                {% elif json_data[r]["12"] is not number %}
+                <div class="row border border-secondary">{{json_data[r]["12"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white">{{json_data[r]["12"]}}</div>
+                {% endif %}
+
+                {% if not loop.last %}
+                <div class="row border border-secondary" id="d{{loop.index}}">{{json_data[r]["13"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white" id="d{{loop.index}}">{{json_data[r]["13"]}}</div>
+                {% endif %}
+
+                {% if json_data[r]["14"] is number and not loop.last %}
+                <div class="row border border-secondary bg-danger bg-opacity-75 text-white" id="e{{loop.index}}" contenteditable="true">{{json_data[r]["14"]}}</div>
+                {% elif json_data[r]["14"] is not number %}
+                <div class="row border border-secondary">{{json_data[r]["14"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white">{{json_data[r]["14"]}}</div>
+                {% endif %}
+
+                {% if not loop.last %}
+                <div class="row border border-secondary" id="f{{loop.index}}">{{json_data[r]["15"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white" id="f{{loop.index}}">{{json_data[r]["15"]}}</div>
+                {% endif %}
+
+                {% if json_data[r]["16"] is number and not loop.last %}
+                <div class="row border border-secondary bg-danger bg-opacity-75 text-white" id="g{{loop.index}}" contenteditable="true">{{json_data[r]["16"]}}</div>
+                {% elif json_data[r]["16"] is not number %}
+                <div class="row border border-secondary">{{json_data[r]["16"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white">{{json_data[r]["16"]}}</div>
+                {% endif %}
+
+                {% if not loop.last %}
+                <div class="row border border-secondary" id="h{{loop.index}}">{{json_data[r]["17"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white" id="h{{loop.index}}">{{json_data[r]["17"]}}</div>
+                {% endif %}
+
+                {% if json_data[r]["18"] is number and not loop.last %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white" id="i{{loop.index}}">{{json_data[r]["18"]}}</div>
+                {% elif json_data[r]["18"] is not number %}
+                <div class="row border border-secondary">{{json_data[r]["18"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white" id="i{{loop.index}}">{{json_data[r]["18"]}}</div>
+                {% endif %}
+
+                {% if not loop.last %}
+                <div class="row border border-secondary" id="j{{loop.index}}">{{json_data[r]["19"]}}</div>
+                {% else %}
+                <div class="row border border-secondary bg-success bg-opacity-75 text-white" id="j{{loop.index}}">{{json_data[r]["19"]}}</div>
+                {% endif %}
+
+                {% if json_data[r]["21"] is number %}
+                <div class="row border border-secondary" id="k{{loop.index}}">{{"%.2f"|format(json_data[r]["21"])}}</div>
+                {% else %}
+                <div class="row border border-secondary">{{json_data[r]["21"]}}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+    
+
+    function calculateParams(brId, brCtcId, br1, br2, br3, br4, th, br1ctc, br2ctc, br3ctc, br4ctc, tctc){
+        let br = parseInt(document.getElementById(brId).textContent);
+        let brCtc = parseInt(document.getElementById(brCtcId).textContent);
+        let ctc = brCtc/br;
+        document.getElementById(brId).addEventListener("input", function(e) {
+            let updateCtc = parseInt(e.target.textContent)*ctc;
+            document.getElementById(brCtcId).textContent = updateCtc;
+            
+            // total head count
+            let totalHeadCount = parseInt(document.getElementById(br1).textContent) + parseInt(document.getElementById(br2).textContent) + parseInt(document.getElementById(br3).textContent) + parseInt(document.getElementById(br4).textContent);
+            document.getElementById(th).textContent = totalHeadCount;
+
+            // total ctc
+            let totalCtc = parseInt(document.getElementById(br1ctc).textContent) + parseInt(document.getElementById(br2ctc).textContent) + parseInt(document.getElementById(br3ctc).textContent) + parseInt(document.getElementById(br4ctc).textContent);
+            document.getElementById(tctc).textContent = totalCtc;
+
+            // Cost per Employee/Month
+            document.getElementById("k2").textContent = (totalCtc/totalHeadCount).toFixed(2);
+            
+            // Br CTC Annual Total
+            let br1ctcArray = ["b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10", "b11", "b12", "b13"];
+            let br2ctcArray = ["d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "d10","d11", "d12", "d13"];
+            let br3ctcArray = ["f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10","f11", "f12", "f13"];
+            let br4ctcArray = ["h2", "h3", "h4", "h5", "h6", "h7", "h8", "h9", "h10","h11", "h12", "h13"];
+
+
+            if (br1ctcArray.includes(brCtcId)){
+                let br1CtcAnnualTotal = 0;
+                br1ctcArray.forEach(element => {
+                br1CtcAnnualTotal += parseInt(document.getElementById(element).textContent);    
+                });
+                document.getElementById("b14").textContent = br1CtcAnnualTotal;
+            }
+            else if (br2ctcArray.includes(brCtcId)){
+                let br2CtcAnnualTotal = 0;
+                br2ctcArray.forEach(element => {
+                br2CtcAnnualTotal += parseInt(document.getElementById(element).textContent);    
+                });
+                document.getElementById("d14").textContent = br2CtcAnnualTotal;
+            }
+            else if (br3ctcArray.includes(brCtcId)){
+                let br3CtcAnnualTotal = 0;
+                br3ctcArray.forEach(element => {
+                br3CtcAnnualTotal += parseInt(document.getElementById(element).textContent);    
+                });
+                document.getElementById("f14").textContent = br3CtcAnnualTotal;
+            }
+            else if (br4ctcArray.includes(brCtcId)){
+                let br4CtcAnnualTotal = 0;
+                br4ctcArray.forEach(element => {
+                br4CtcAnnualTotal += parseInt(document.getElementById(element).textContent);    
+                });
+                document.getElementById("h14").textContent = br4CtcAnnualTotal;
+            }
+
+            // Total CTC Annual Total
+            let totalCtcAnnualTotal = parseInt(document.getElementById("b14").textContent) + parseInt(document.getElementById("d14").textContent) + parseInt(document.getElementById("f14").textContent) + parseInt(document.getElementById("h14").textContent);
+            document.getElementById("j14").textContent = totalCtcAnnualTotal;
+
+            // Cost per Employee/Month Annual Total
+            document.getElementById("k14").textContent = (totalCtcAnnualTotal/parseInt(document.getElementById("i14").textContent)).toFixed(2);
+
+        });
+        
+    }
+
+
+    calculateParams("a2","b2", br1="a2", br2="c2", br3="e2", br4="g2", th="i2", br1ctc="b2", br2ctc="d2", br3ctc="f2", br4ctc="h2", tctc="j2");
+    calculateParams("a3","b3", br1="a3", br2="c3", br3="e3", br4="g3", th="i3", br1ctc="b3", br2ctc="d3", br3ctc="f3", br4ctc="h3", tctc="j3");
+    calculateParams("a4","b4", br1="a4", br2="c4", br3="e4", br4="g4", th="i4", br1ctc="b4", br2ctc="d4", br3ctc="f4", br4ctc="h4", tctc="j4");
+    calculateParams("a5","b5", br1="a5", br2="c5", br3="e5", br4="g5", th="i5", br1ctc="b5", br2ctc="d5", br3ctc="f5", br4ctc="h5", tctc="j5");
+    calculateParams("a6","b6", br1="a6", br2="c6", br3="e6", br4="g6", th="i6", br1ctc="b6", br2ctc="d6", br3ctc="f6", br4ctc="h6", tctc="j6");
+    calculateParams("a7","b7", br1="a7", br2="c7", br3="e7", br4="g7", th="i7", br1ctc="b7", br2ctc="d7", br3ctc="f7", br4ctc="h7", tctc="j7");
+    calculateParams("a8","b8", br1="a8", br2="c8", br3="e8", br4="g8", th="i8", br1ctc="b8", br2ctc="d8", br3ctc="f8", br4ctc="h8", tctc="j8");
+    calculateParams("a9","b9", br1="a9", br2="c9", br3="e9", br4="g9", th="i9", br1ctc="b9", br2ctc="d9", br3ctc="f9", br4ctc="h9", tctc="j9");
+    calculateParams("a10","b10", br1="a10", br2="c10", br3="e10", br4="g10", th="i10", br1ctc="b10", br2ctc="d10", br3ctc="f10", br4ctc="h10", tctc="j10");
+    calculateParams("a11","b11", br1="a11", br2="c11", br3="e11", br4="g11", th="i11", br1ctc="b11", br2ctc="d11", br3ctc="f11", br4ctc="h11", tctc="j11");
+    calculateParams("a12","b12", br1="a12", br2="c12", br3="e12", br4="g12", th="i12", br1ctc="b12", br2ctc="d12", br3ctc="f12", br4ctc="h12", tctc="j12");
+    calculateParams("a13","b13", br1="a13", br2="c13", br3="e13", br4="g13", th="i13", br1ctc="b13", br2ctc="d13", br3ctc="f13", br4ctc="h13", tctc="j13");
+
+    calculateParams("c2","d2", br1="a2", br2="c2", br3="e2", br4="g2", th="i2", br1ctc="b2", br2ctc="d2", br3ctc="f2", br4ctc="h2", tctc="j2");
+    calculateParams("c3","d3", br1="a3", br2="c3", br3="e3", br4="g3", th="i3", br1ctc="b3", br2ctc="d3", br3ctc="f3", br4ctc="h3", tctc="j3");
+    calculateParams("c4","d4", br1="a4", br2="c4", br3="e4", br4="g4", th="i4", br1ctc="b4", br2ctc="d4", br3ctc="f4", br4ctc="h4", tctc="j4");
+    calculateParams("c5","d5", br1="a5", br2="c5", br3="e5", br4="g5", th="i5", br1ctc="b5", br2ctc="d5", br3ctc="f5", br4ctc="h5", tctc="j5");
+    calculateParams("c6","d6", br1="a6", br2="c6", br3="e6", br4="g6", th="i6", br1ctc="b6", br2ctc="d6", br3ctc="f6", br4ctc="h6", tctc="j6");
+    calculateParams("c7","d7", br1="a7", br2="c7", br3="e7", br4="g7", th="i7", br1ctc="b7", br2ctc="d7", br3ctc="f7", br4ctc="h7", tctc="j7");
+    calculateParams("c8","d8", br1="a8", br2="c8", br3="e8", br4="g8", th="i8", br1ctc="b8", br2ctc="d8", br3ctc="f8", br4ctc="h8", tctc="j8");
+    calculateParams("c9","d9", br1="a9", br2="c9", br3="e9", br4="g9", th="i9", br1ctc="b9", br2ctc="d9", br3ctc="f9", br4ctc="h9", tctc="j9");
+    calculateParams("c10","d10", br1="a10", br2="c10", br3="e10", br4="g10", th="i10", br1ctc="b10", br2ctc="d10", br3ctc="f10", br4ctc="h10", tctc="j10");
+    calculateParams("c11","d11", br1="a11", br2="c11", br3="e11", br4="g11", th="i11", br1ctc="b11", br2ctc="d11", br3ctc="f11", br4ctc="h11", tctc="j11");
+    calculateParams("c12","d12", br1="a12", br2="c12", br3="e12", br4="g12", th="i12", br1ctc="b12", br2ctc="d12", br3ctc="f12", br4ctc="h12", tctc="j12");
+    calculateParams("c13","d13", br1="a13", br2="c13", br3="e13", br4="g13", th="i13", br1ctc="b13", br2ctc="d13", br3ctc="f13", br4ctc="h13", tctc="j13");
+
+    calculateParams("e2","f2", br1="a2", br2="c2", br3="e2", br4="g2", th="i2", br1ctc="b2", br2ctc="d2", br3ctc="f2", br4ctc="h2", tctc="j2");
+    calculateParams("e3","f3", br1="a3", br2="c3", br3="e3", br4="g3", th="i3", br1ctc="b3", br2ctc="d3", br3ctc="f3", br4ctc="h3", tctc="j3");
+    calculateParams("e4","f4", br1="a4", br2="c4", br3="e4", br4="g4", th="i4", br1ctc="b4", br2ctc="d4", br3ctc="f4", br4ctc="h4", tctc="j4");
+    calculateParams("e5","f5", br1="a5", br2="c5", br3="e5", br4="g5", th="i5", br1ctc="b5", br2ctc="d5", br3ctc="f5", br4ctc="h5", tctc="j5");
+    calculateParams("e6","f6", br1="a6", br2="c6", br3="e6", br4="g6", th="i6", br1ctc="b6", br2ctc="d6", br3ctc="f6", br4ctc="h6", tctc="j6");
+    calculateParams("e7","f7", br1="a7", br2="c7", br3="e7", br4="g7", th="i7", br1ctc="b7", br2ctc="d7", br3ctc="f7", br4ctc="h7", tctc="j7");
+    calculateParams("e8","f8", br1="a8", br2="c8", br3="e8", br4="g8", th="i8", br1ctc="b8", br2ctc="d8", br3ctc="f8", br4ctc="h8", tctc="j8");
+    calculateParams("e9","f9", br1="a9", br2="c9", br3="e9", br4="g9", th="i9", br1ctc="b9", br2ctc="d9", br3ctc="f9", br4ctc="h9", tctc="j9");
+    calculateParams("e10","f10", br1="a10", br2="c10", br3="e10", br4="g10", th="i10", br1ctc="b10", br2ctc="d10", br3ctc="f10", br4ctc="h10", tctc="j10");
+    calculateParams("e11","f11", br1="a11", br2="c11", br3="e11", br4="g11", th="i11", br1ctc="b11", br2ctc="d11", br3ctc="f11", br4ctc="h11", tctc="j11");
+    calculateParams("e12","f12", br1="a12", br2="c12", br3="e12", br4="g12", th="i12", br1ctc="b12", br2ctc="d12", br3ctc="f12", br4ctc="h12", tctc="j12");
+    calculateParams("e13","f13", br1="a13", br2="c13", br3="e13", br4="g13", th="i13", br1ctc="b13", br2ctc="d13", br3ctc="f13", br4ctc="h13", tctc="j13");
+
+    calculateParams("g2","h2", br1="a2", br2="c2", br3="e2", br4="g2", th="i2", br1ctc="b2", br2ctc="d2", br3ctc="f2", br4ctc="h2", tctc="j2");
+    calculateParams("g3","h3", br1="a3", br2="c3", br3="e3", br4="g3", th="i3", br1ctc="b3", br2ctc="d3", br3ctc="f3", br4ctc="h3", tctc="j3");
+    calculateParams("g4","h4", br1="a4", br2="c4", br3="e4", br4="g4", th="i4", br1ctc="b4", br2ctc="d4", br3ctc="f4", br4ctc="h4", tctc="j4");
+    calculateParams("g5","h5", br1="a5", br2="c5", br3="e5", br4="g5", th="i5", br1ctc="b5", br2ctc="d5", br3ctc="f5", br4ctc="h5", tctc="j5");
+    calculateParams("g6","h6", br1="a6", br2="c6", br3="e6", br4="g6", th="i6", br1ctc="b6", br2ctc="d6", br3ctc="f6", br4ctc="h6", tctc="j6");
+    calculateParams("g7","h7", br1="a7", br2="c7", br3="e7", br4="g7", th="i7", br1ctc="b7", br2ctc="d7", br3ctc="f7", br4ctc="h7", tctc="j7");
+    calculateParams("g8","h8", br1="a8", br2="c8", br3="e8", br4="g8", th="i8", br1ctc="b8", br2ctc="d8", br3ctc="f8", br4ctc="h8", tctc="j8");
+    calculateParams("g9","h9", br1="a9", br2="c9", br3="e9", br4="g9", th="i9", br1ctc="b9", br2ctc="d9", br3ctc="f9", br4ctc="h9", tctc="j9");
+    calculateParams("g10","h10", br1="a10", br2="c10", br3="e10", br4="g10", th="i10", br1ctc="b10", br2ctc="d10", br3ctc="f10", br4ctc="h10", tctc="j10");
+    calculateParams("g11","h11", br1="a11", br2="c11", br3="e11", br4="g11", th="i11", br1ctc="b11", br2ctc="d11", br3ctc="f11", br4ctc="h11", tctc="j11");
+    calculateParams("g12","h12", br1="a12", br2="c12", br3="e12", br4="g12", th="i12", br1ctc="b12", br2ctc="d12", br3ctc="f12", br4ctc="h12", tctc="j12");
+    calculateParams("g13","h13", br1="a13", br2="c13", br3="e13", br4="g13", th="i13", br1ctc="b13", br2ctc="d13", br3ctc="f13", br4ctc="h13", tctc="j13");
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
